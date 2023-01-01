@@ -13,9 +13,6 @@ import com.SoloProject.service.UserService;
 
 /**
  * UserAccountController manages user accounts
- * Not required in current application.
- * @author Power.Tam
- * @version 2.0
  */
 
 @Controller

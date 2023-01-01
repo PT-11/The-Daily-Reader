@@ -20,11 +20,7 @@ public class ArticleService {
 
 	ArticleRepository articleRepo;
 	
-	private static HttpURLConnection connection;
-	private List<Article> articleList = new ArrayList<>();
-	private JSONArray articles = new JSONArray();
-	StringBuffer responseContent = new StringBuffer();
-	
+
 	private static final String APIKEY = System.getenv("TheNewsApiKey");
 	
 	public ArticleService() {
@@ -75,25 +71,19 @@ public class ArticleService {
 
 	private List<Article> callNewsApi(String urlString, boolean limitedToThree) {
 	
-		StringBuffer responseContent = new StringBuffer();
+		StringBuilder responseContent =  null ; //StringBuilder is faster for single thread
 		
-		List<Article> returnedArticles = new ArrayList<>();
+		List<Article> returnedArticles = null ;
 		
-		if (!responseContent.isEmpty()) {
-			responseContent.delete(0, responseContent.length());
-		}
-		
-		if (!returnedArticles.isEmpty()) {
-			returnedArticles.removeAll(returnedArticles);
-		}
-
-		BufferedReader reader;
-		String line;
+		BufferedReader reader = null;
+		String line = null;
+		HttpURLConnection connection = null ;
 		
 		try {
-			URL url = getUrl(new URL(urlString));
+			URL url = new URL(urlString);
 			
-			connection = (HttpURLConnection) url.openConnection();
+						
+			 connection = (HttpURLConnection) url.openConnection();
 			
 			//Request setup
 			connection.setRequestMethod("GET");
@@ -102,25 +92,45 @@ public class ArticleService {
 			
 			int status = connection.getResponseCode();
 			
+			responseContent = new StringBuilder();
+			
+		
+			
 			if (status > 200) {
-				reader = getBufferedReader(new BufferedReader(new InputStreamReader(connection.getErrorStream())));
+				reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
 				while((line = reader.readLine()) != null) {
 					responseContent.append(line);
 				}
-				reader.close();
+				
 			} else {
-				reader = getBufferedReader(new BufferedReader(new InputStreamReader(connection.getInputStream())));
+				reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				while((line = reader.readLine()) != null) {
 					responseContent.append(line);
 				}
-				reader.close();
+				
 			}
 			returnedArticles = parse(responseContent.toString(), limitedToThree);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
-			connection.disconnect();
+			if(connection != null){
+			   connection.disconnect();
+			}
+			
+			if(reader != null){
+				try
+				{
+				reader.close();
+				}
+				catch(Exception ex)
+				{
+					System.out.println(ex.getMessage());
+					ex.printStackTrace();
+					
+				}
+			}
+		
 		}
 		
 		return returnedArticles;
@@ -128,11 +138,9 @@ public class ArticleService {
 
 	public List<Article> parse(String responseBody, boolean limitToThree) {
 		
-		if (!articleList.isEmpty()) {
-			articleList.removeAll(articleList);
-		}
-
+		List<Article> articleList = new ArrayList<Article>(5);
 		
+	
 		String title;
 		String articleURL;
 		String urlToImage;
@@ -141,7 +149,7 @@ public class ArticleService {
 		String responseUpdated = responseBody.substring(responseBody.indexOf("["));
 		responseUpdated.trim();
 
-		articles = getJsonArray(new JSONArray(responseUpdated));
+		JSONArray articles = new JSONArray(responseUpdated);
 		int size = articles.length();
 		
 		if (limitToThree) {
@@ -210,24 +218,5 @@ public class ArticleService {
         }
 
 		return null;
-	}
-	
-	private static JSONArray getJsonArray(JSONArray array) {
-		
-		return array;
-	}
-	
-	private static URL getUrl(URL url) {
-		return url;
-	}
-	
-	private static BufferedReader getBufferedReader(BufferedReader bufferedReader) {
-		return bufferedReader;
-	}
-	
-	
-	
-	
-	
-	
+	}	
 }

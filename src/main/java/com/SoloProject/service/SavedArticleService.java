@@ -12,7 +12,6 @@ import com.SoloProject.repository.UserRepository;
 @Service
 public class SavedArticleService {
 	private UserRepository userRepo;
-	private Article article = new Article();
 	
 	@Autowired
 	public SavedArticleService(UserRepository userRepo) {
@@ -22,15 +21,11 @@ public class SavedArticleService {
 
 	public void save(String title, String url, String urlToImage, String description, int userId) {
 		
-		article.setTitle(title);
-		article.setUrl(url);
-		article.setUrlToImage(urlToImage);
-		article.setDescription(description);
 		User user = userRepo.getById(userId);
-		user.add(article);
+		
+		user.add(new Article(title, url, urlToImage, description));
 		
 		userRepo.save(user);
-		
 	}
 
 	public List<Article> getSavedList(int id) {

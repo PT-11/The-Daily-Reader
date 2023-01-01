@@ -29,31 +29,13 @@ public class ArticleController {
 	@RequestMapping(value={"/searchForArticles", "/"})
 	public String searchForArticles(Model model, HttpSession session, String header) {
 		
-		List<Article> list1 = new ArrayList<>();
-		List<Article> list2 = new ArrayList<>();
-		List<Article> list3 = new ArrayList<>();
-		List<Article> temp = articleService.getNewApi(null, session, false);
+		List<Article> list1 = new ArrayList<>(articleService.getNewApi(null, session, false));
+			
+		List<Article> list2 = new ArrayList<>(articleService.getNewApi("politics", session, true));
 		
-		for (Article article : temp) {
-			list1.add(article);
-		}
-				
-		temp = articleService.getNewApi("politics", session, true);
+		List<Article> list3 = new ArrayList<>(articleService.getNewApi("entertainment", session, true));
 		
-		for (Article article : temp) {
-			list2.add(article);
-		}
-		
-		temp = articleService.getNewApi("entertainment", session, true);
-		
-		for (Article article : temp) {
-			list3.add(article);
-		}
-		temp = articleService.getNewApi("tech", session, false);
-		
-		for (Article article : temp) {
-			list1.add(article);
-		}
+		list1.addAll(articleService.getNewApi("tech", session, false));		
 		
 		if (header == null) {
 			header = "TODAY";
@@ -72,17 +54,11 @@ public class ArticleController {
 		
 		String header = "Search results for: " + topic;
 		
-		List<Article> tempList = new ArrayList<>();
+		List<Article> searchResults = new ArrayList<>(articleService.getSearchResults(topic, session, false));
 		
-		for (Article article : articleService.getSearchResults(topic, session, false)) {
-			tempList.add(article);
-		}
+		searchResults.addAll(articleService.getSearchResults(topic, session, true));
 		
-		for (Article article : articleService.getSearchResults(topic, session, true)) {
-			tempList.add(article);
-		}
-		
-		session.setAttribute("list", tempList);
+		session.setAttribute("list", searchResults);
 		model.addAttribute("header", header);
 		return DISPLAY_SEARCHED_ARTICLES;
 			

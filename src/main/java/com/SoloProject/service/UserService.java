@@ -9,9 +9,6 @@ import com.SoloProject.repository.UserRepository;
 
 /**
  * UserService contains application logic
- * 
- * @author Power.Tam
- * @version 2.0
  */
 @Service
 public class UserService {

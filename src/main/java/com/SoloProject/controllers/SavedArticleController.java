@@ -67,8 +67,6 @@ public class SavedArticleController {
 					+ "\n or browse for your own using the search bar.");
 		}
 		
-
-		
 		session.setAttribute("savedList", currentUser.getSavedArticles());
 		
 		return VIEW_SAVED_ARTICLES;		
