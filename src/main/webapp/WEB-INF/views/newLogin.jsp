@@ -15,7 +15,7 @@
 
 <main class="form-signin w-100 m-auto register-box round-corner">
   <form action = "processLogin" method="POST">
-    <img class="mb-4" src="img/Yahoo_News_Logo.png" alt="" width="305" height="150">
+    <img class="mb-4" src="img/Yahoo_News_Logo.png" alt="" width="250" height="125">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
