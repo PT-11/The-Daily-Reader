@@ -9,7 +9,7 @@
 <title>The Daily Reader</title>
 </head>
 <body>
-<%@include file="header.jsp" %>
+<%@include file="header2.jsp" %>
 
   
         <div class="content-wrapper">

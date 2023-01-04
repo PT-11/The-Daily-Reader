@@ -29,23 +29,25 @@ public class ArticleController {
 	@RequestMapping(value={"/searchForArticles", "/"})
 	public String searchForArticles(Model model, HttpSession session, String header) {
 		
-		List<Article> list1 = new ArrayList<>(articleService.getNewApi(null, session, false));
+		List<Article> list1 = new ArrayList<>(articleService.getNewApi(header, session, false, false));
 			
-		List<Article> list2 = new ArrayList<>(articleService.getNewApi("politics", session, true));
+		List<Article> list2 = new ArrayList<>(articleService.getLatestCategory(header, session, true));
+		List<Article> list3 = new ArrayList<>(articleService.getNewApi("general", session, false, true));
 		
-		List<Article> list3 = new ArrayList<>(articleService.getNewApi("entertainment", session, true));
-		
-		list1.addAll(articleService.getNewApi("tech", session, false));		
+		list1.addAll(articleService.getNewApi("tech", session, true, false));		
 		
 		if (header == null) {
-			header = "TODAY";
+			header = "General";
 		}
+		
+		header = header.substring(0, 1).toUpperCase() + header.substring(1);
 		
 		model.addAttribute("header", header);
 		
+		
 		session.setAttribute("list", list1);
-		session.setAttribute("trendList", list2);
-		session.setAttribute("recentList", list3);
+		session.setAttribute("trendList", list3);
+		session.setAttribute("recentList", list2);
 		return DISPLAY_SEARCHED_ARTICLES;
 	}
 	

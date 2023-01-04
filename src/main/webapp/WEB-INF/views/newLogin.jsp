@@ -10,21 +10,28 @@
   </head>
 	
   <body>
-<%@include file="header.jsp" %>
+<%@include file="header2.jsp" %>
  
 
-<main class="form-signin w-100 m-auto register-box round-corner">
+<main style="padding-top:8.5%" class="col-sm-12 form-signin w-100 m-auto register-box round-corner">
   <form action = "processLogin" method="POST">
-    <img class="mb-4" src="img/Yahoo_News_Logo.png" alt="" width="250" height="125">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <h1 style="font-weight: bold;" class="h1 mb-3 fw-normal">Sign in</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" path="username" name="username" placeholder="Username">
+   		
+      	<input type="text" class="form-control" id="floatingInput" path="username" name="username" placeholder="Username">
+     
     </div>
-    <div class="form-floating">
-      <input path="password" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+    <div style="padding-top:8px" class="form-floating">
+   		
+     	 <input path="password" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
     </div>
+    <br>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+          <div class="text-center">
+        <p>Not a member? <a href="goToRegisterPage">Register</a></p>
+      </div>
   </form>
   	<br>
 	<c:if test="${not empty requestScope.error }">

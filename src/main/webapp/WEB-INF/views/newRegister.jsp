@@ -9,11 +9,11 @@
 <title>Register Form</title>
 </head>
 <body>
-<%@include file="header.jsp" %>
+<%@include file="header2.jsp" %>
 
 
 <section class="vh-100">
-  <div class="container h-100">
+  <div class="container h-25">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-12 col-xl-11">
         <div class="text-black">
@@ -21,7 +21,7 @@
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                <p style="font-weight: bold;" class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
                 <sf:form class="mx-1 mx-md-4" action = "processUser" method="POST" modelAttribute="user">
 

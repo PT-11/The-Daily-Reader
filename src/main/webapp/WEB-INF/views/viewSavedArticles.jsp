@@ -8,7 +8,7 @@
 <title>Saved Articles</title>
 </head>
 
-<%@include file="header.jsp" %>
+<%@include file="header2.jsp" %>
 
   <body>
         <div class="content-wrapper">

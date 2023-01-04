@@ -55,8 +55,34 @@ public class ArticleService {
 	}
 
 	//Use this method to search with categories determined by the API
-	public List<Article> getNewApi(String category, HttpSession session, boolean limitedToThree) {
+	public List<Article> getNewApi(String category, HttpSession session, boolean secondList, boolean limitToThree) {
 	
+		LocalDate currentDate = java.time.LocalDate.now();
+		String date = null;
+		
+		if (secondList) {
+			date = currentDate.minusWeeks(1).toString();
+		} 
+		else if (!secondList) {
+			date = currentDate.minusDays(2).toString();
+		}
+			
+		if (category == null) {
+			category = "general";
+		}
+		
+		String urlString = "https://api.thenewsapi.com/v1/news/top?api_token=" 
+				+ APIKEY
+				+ "&categories=" + category
+				+ "&language=en"
+				+ "&published_before=" + date;
+		
+		return callNewsApi(urlString, limitToThree);
+	}
+	
+	//List to find the latest new articles for a particular category
+	public List<Article> getLatestCategory(String category, HttpSession session, boolean limitedToThree) {
+		
 		if (category == null) {
 			category = "sports";
 		}
@@ -71,13 +97,13 @@ public class ArticleService {
 
 	private List<Article> callNewsApi(String urlString, boolean limitedToThree) {
 	
-		StringBuilder responseContent =  null ; //StringBuilder is faster for single thread
+		StringBuilder responseContent =  null;
 		
-		List<Article> returnedArticles = null ;
+		List<Article> returnedArticles = null;
 		
 		BufferedReader reader = null;
 		String line = null;
-		HttpURLConnection connection = null ;
+		HttpURLConnection connection = null;
 		
 		try {
 			URL url = new URL(urlString);
@@ -97,6 +123,7 @@ public class ArticleService {
 		
 			
 			if (status > 200) {
+				System.out.println("Status is > 200");
 				reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
 				while((line = reader.readLine()) != null) {
 					responseContent.append(line);
@@ -109,6 +136,7 @@ public class ArticleService {
 				}
 				
 			}
+			System.out.println("Response for url: " + urlString + " is " + responseContent);
 			returnedArticles = parse(responseContent.toString(), limitedToThree);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -136,7 +164,7 @@ public class ArticleService {
 		return returnedArticles;
 	}
 
-	public List<Article> parse(String responseBody, boolean limitToThree) {
+	private List<Article> parse(String responseBody, boolean limitToThree) {
 		
 		List<Article> articleList = new ArrayList<Article>(5);
 		
