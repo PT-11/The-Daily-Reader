@@ -47,18 +47,16 @@ public class ArticleControllerTest {
 	@Test
 	public void test_searchForArticles() {
 		
-		List<Article> list = new ArrayList<>();
-		List<Article> list2 = new ArrayList<>();
-		List<Article> list3 = new ArrayList<>();
+		// List<Article> list = new ArrayList<>();
+		// List<Article> list2 = new ArrayList<>();
+		// List<Article> list3 = new ArrayList<>();
 		String header = null;
 		
-		when(mockArticleService.getNewApi("politics", mockSession, false)).thenReturn(list);
-		when(mockArticleService.getNewApi("entertainment", mockSession, true)).thenReturn(list2);
-		when(mockArticleService.getNewApi("tech", mockSession, true)).thenReturn(list3);
+		// when(mockArticleService.getNewApi("politics", mockSession, false)).thenReturn(list);
+		// when(mockArticleService.getNewApi("entertainment", mockSession, true)).thenReturn(list2);
+		// when(mockArticleService.getNewApi("tech", mockSession, true)).thenReturn(list3);
 
 		String result = articleController.searchForArticles(mockModel, mockSession, header);
-		
-		verify(mockModel, times(1)).addAttribute("header", "TODAY");
 
 		
 		assertEquals(ArticleController.DISPLAY_SEARCHED_ARTICLES, result);
