@@ -3,7 +3,6 @@
 	<link href="css/styles.css" rel="stylesheet">
 	<link href="css/full-explore.css" rel="stylesheet">
 	<link href="css/sign-in.css" rel="stylesheet">
-	<!-- <link href="css/mdi/css/materialdesignicons.min.css" rel="stylesheet"> -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -164,28 +163,15 @@
                           <a class="nav-link" href="searchForArticles?header=travel">Travel</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="./contactus.html">Contact</a>
-                        </li>
+                          <form action="searchForTopic" method="GET">
+                   
+					  <input type="text" name="topic" style="height: 15px" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+					
+					  </form>
+						</li>
                       </ul>
                     </div>
                   </div>
-                   <ul class="social-media">
-                    <li>
-                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                        <i class="mdi mdi-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                        <i class="mdi mdi-youtube"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                        <i class="mdi mdi-twitter"></i>
-                      </a>
-                    </li>
-                  </ul>
                 </div>
               </div>
             </nav>

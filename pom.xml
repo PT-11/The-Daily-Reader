@@ -37,11 +37,13 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!--< 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -89,6 +91,16 @@
     <artifactId>json</artifactId>
     <version>20220320</version>
 </dependency>
+
+<!--GOOGLE SQL DEPENDENCIES -->
+
+     <dependency>
+	 	<groupId>org.springframework.cloud</groupId>
+	 	<artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
+	 	<version>1.2.8.RELEASE</version>
+ 	</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -96,9 +108,23 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>src/main/resources/META-INF/Manifest.mf</manifestFile>
+					</archive>
+				</configuration>
 			</plugin>
+			
+			<plugin>
+	        <groupId>com.google.cloud.tools</groupId>
+	        <artifactId>appengine-maven-plugin</artifactId>
+	        <version>2.2.0</version>
+	        <configuration>
+	          <version>1</version>
+	          <projectId>GCLOUD_CONFIG</projectId>
+	        </configuration>
+      </plugin>
+			
 		</plugins>
-		<finalName>the-daily-reader</finalName>
 	</build>
-
 </project>
