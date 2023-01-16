@@ -13,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-//@EnableWebMvc
 @Configuration
 @ComponentScan({"com.SoloProject", "com.SoloProject.config", "com.SoloProject.controllers"
 	, "com.SoloProject.model", "com.SoloProject.repository", "com.SoloProject.service", 

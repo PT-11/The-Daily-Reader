@@ -37,13 +37,14 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!--< 
+		<!--< For local dev 		-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		-->
+		<!--< For local dev 		-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -92,14 +93,14 @@
     <version>20220320</version>
 </dependency>
 
-<!--GOOGLE SQL DEPENDENCIES -->
-
+ 
+		<!--< Cloud 		
      <dependency>
 	 	<groupId>org.springframework.cloud</groupId>
 	 	<artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
 	 	<version>1.2.8.RELEASE</version>
  	</dependency>
-
+ 	-->
 
 	</dependencies>
 
@@ -114,7 +115,8 @@
 					</archive>
 				</configuration>
 			</plugin>
-			
+			 
+		<!--< Cloud 	
 			<plugin>
 	        <groupId>com.google.cloud.tools</groupId>
 	        <artifactId>appengine-maven-plugin</artifactId>
@@ -124,6 +126,8 @@
 	          <projectId>GCLOUD_CONFIG</projectId>
 	        </configuration>
       </plugin>
+			 	-->
+			
 			
 		</plugins>
 	</build>
